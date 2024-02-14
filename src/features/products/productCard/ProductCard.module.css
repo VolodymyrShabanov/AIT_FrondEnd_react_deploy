@@ -1,0 +1,29 @@
+
+.productCard {
+    display: flex;
+    flex-direction: column;
+    
+    margin: 30px;
+    padding: 15px;
+    background-color: rgb(199, 241, 132);
+    border-radius: 15px;
+    justify-items: center;
+    align-items: center;
+}
+
+.title {
+    word-wrap: break-word;
+    width: 200px;
+    margin: 10px;
+}
+
+.imgWrapper {
+    width: 280px;
+    height: 380px;
+}
+
+.imgWrapper>img {
+    width: 100%;
+    height: 100%;
+}
+
