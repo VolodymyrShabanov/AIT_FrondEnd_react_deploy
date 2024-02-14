@@ -24,7 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="AIT_FrondEnd_react_deploy" element={<Layout />}>
           <Route index element={<h1>Home Page</h1>} />
           <Route path="products" element={<ProductPage />} />
           <Route path="products/:id" element={<Product />} />
