@@ -1,101 +1,139 @@
-import React, { FC, FormEvent, useState } from "react"
+import React, { ChangeEvent, FC, FormEvent, useState } from "react"
 import style from "./Product.module.css"
 import { useAppDispatch } from "../../../app/hooks"
 import { addProduct } from "../productAction"
 import IProductCredentials from "../types/ProductCredentials"
+import IProduct from "../types/Product"
+import useLocalStorage from "../../../hooks/useLS"
 
 const ProductForm: FC = () => {
+  // const [title, setTitle] = useState("")
+  // const [description, setDescription] = useState("")
+  // const [category, setCategory] = useState("")
+  // const [price, setPrice] = useState("")
+  // const [image, setImage] = useState("")
+
+  const dispatch = useAppDispatch();
+  const [error, setError] = useState('');
+  
+  const [product, setProduct] = useLocalStorage("product",{
+    title: "",
+    description: "",
+    category: "",
+    price: "",
+    image: "",
+  })
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+
+    setProduct({
+      ...product,
+      [name]: value,
+    })
+  }
+
   function validateInputs(): boolean {
     const linkPattern = /^(https?:\/\/)?([\w.-]+\.\w{2,})(\/\S*)?$/
-    if (title.trim() === "") {
+
+    if (product.title.trim() === "") {
       setError("title is not valid")
       return false
     }
-    if (description.trim() === "") {
+    if (product.description.trim() === "") {
       setError("description is not valid")
       return false
     }
-    if (category.trim() === "") {
+    if (product.category.trim() === "") {
       setError("category is not valid")
       return false
     }
-    if (price.trim() === "" || Number.isNaN(Number(price))) {
+    if (product.price.trim() === "" || Number.isNaN(Number(product.price))) {
       setError("price is not valid")
       return false
     }
-    if (!linkPattern.test(image)) {
+    if (!linkPattern.test(product.image)) {
       setError("url is not valid")
       return false
     }
     return true
   }
 
-  const dispatch = useAppDispatch()
-
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
-  const [category, setCategory] = useState("")
-  const [price, setPrice] = useState("")
-  const [image, setImage] = useState("")
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setError('');
 
-    const data: IProductCredentials = {
-      title,
-      description,
-      category,
-      price: Number(price),
-      image,
-    }
+    sessionStorage.setItem("price", product.price)
 
-    // if (validateInputs()) {
-      dispatch(addProduct(data))
+    console.log(product)
+
+    // const data: IProductCredentials = {
+    //   title,
+    //   description,
+    //   category,
+    //   price: Number(price),
+    //   image,
     // }
+
+    if (validateInputs()) {
+    dispatch(addProduct(product))
+    }
 
     // console.log(data);
   }
 
   return (
+    <>
+    
     <div className={style.formContainer}>
       {/* <h1>Product Form</h1> */}
       <form className={style.form} onSubmit={handleSubmit} action="">
         <label>Add new product</label>
         <input
-          onChange={(e) => setTitle(e.target.value)}
+          name="title"
+          onChange={handleChange}
           placeholder="title"
           type="text"
-          value={title}
+          value={product.title}
         />
         <input
-          onChange={(e) => setDescription(e.target.value)}
+          name="description"
+          onChange={handleChange}
           placeholder="description"
           type="text"
-          value={description}
+          value={product.description}
         />
         <input
-          onChange={(e) => setCategory(e.target.value)}
+          name="category"
+          onChange={handleChange}
           placeholder="category"
           type="text"
-          value={category}
+          value={product.category}
         />
         <input
-          onChange={(e) => setPrice(e.target.value)}
+          name="price"
+          onChange={handleChange}
           placeholder="price"
           type="text"
-          value={price}
+          value={product.price}
         />
         <input
-          onChange={(e) => setImage(e.target.value)}
+          name="image"
+          onChange={handleChange}
           placeholder="image"
           type="text"
-          value={image}
+          value={product.image}
         />
         <button type="submit" className="button">
           Add file
         </button>
       </form>
     </div>
+    <div style={{textAlign: 'center'}}>
+        {error && <span style={{color: 'red'}}>{error}</span>}
+    </div>
+    </>
   )
 }
 

@@ -33,7 +33,7 @@ const CityToggle: FC = () => {
         <div className="App">
             <h1>{cityData.name}</h1>
             <p>{cityData.title}</p>
-            <img width={300} src={cityData.imgUrl} alt="" />
+            <img width={600} src={cityData.imgUrl} alt="" />
 
             {/* <button type="button" onClick={toggleCity}>Change</button> */}
             <br />

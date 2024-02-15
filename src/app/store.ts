@@ -3,6 +3,7 @@ import counterReducer from "../features/counter/counterSlice"
 import { productSlice } from "../features/products/productsSlice"
 import { memesSlice } from "../features/memes/memesSlice"
 import { usersSlice } from "../features/users/usersSlice"
+import { shopSlice } from "../components/shop/shopSlice"
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     products: productSlice.reducer,
     memes: memesSlice.reducer,
     users: usersSlice.reducer,
+    shop: shopSlice.reducer,
     
   },
 })

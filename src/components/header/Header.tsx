@@ -13,7 +13,7 @@ const Header: FC = () => {
   }, [])
   return (
     <div className={styles.navbar}>
-      <NavLink to="AIT_FrondEnd_react_deploy">Home page</NavLink>
+      <NavLink to="/AIT_FrondEnd_react_deploy">Home page</NavLink>
 
       <NavLink to="products">Products</NavLink>
       
@@ -21,7 +21,7 @@ const Header: FC = () => {
 
       <NavLink to="memes">Memes</NavLink>
       <NavLink to="dog-card">Dog Card</NavLink>
-      <NavLink to="city-toggle">Toggle City</NavLink>
+      <NavLink to="city-page">City Page</NavLink>
       <NavLink to="sandwich">Sandwich</NavLink>
       <NavLink to="cat-card">Cat Card</NavLink>
       <NavLink to="flower-card">Flower Card</NavLink>
