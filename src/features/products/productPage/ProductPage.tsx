@@ -6,6 +6,7 @@ import { loadProducts } from "../productAction"
 import ProductForm from "../productForm/ProductForm"
 import ProductCard from "../productCard/ProductCard"
 import Loader from "../../../components/loader/Loader"
+import { motion } from "framer-motion"
 
 const ProductPage: FC = () => {
   // const [products, setProducts] = useState<IProduct[]>([]);
@@ -30,8 +31,13 @@ const ProductPage: FC = () => {
     dispatch(loadProducts())
   }, [])
 
+  const initialVariant = {
+    hidden: { opacity: 1, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } },
+  }
+
   return (
-    <div>
+    <motion.div initial="hidden" animate="visible" variants={initialVariant}>
       <ProductForm />
       {isLoading && <Loader />}
       {error && <h4 style={{ color: "red" }}>Error {error}</h4>}
@@ -44,6 +50,7 @@ const ProductPage: FC = () => {
               title={el.title}
               description={el.description}
               image={el.image}
+              price={el.price}
             />
 
             // <div>
@@ -61,7 +68,7 @@ const ProductPage: FC = () => {
           ))}
         </ul>
       )}
-    </div>
+    </motion.div>
   )
 }
 

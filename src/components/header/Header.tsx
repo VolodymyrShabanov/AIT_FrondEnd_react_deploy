@@ -6,13 +6,16 @@ import { loadProducts } from "../../features/products/productAction";
 
 const Header: FC = () => {
 
-  const {products} =useAppSelector(state => state.products)
+  const {products, favorites} =useAppSelector(state => state.products)
+
   const dispatch =useAppDispatch();
   useEffect(() => {
     dispatch(loadProducts())
   }, [])
   return (
+    <>
     <div className={styles.navbar}>
+      <div className={styles.links}>
       <NavLink to="/">Home page</NavLink>
 
       <NavLink to="products">Products</NavLink>
@@ -25,8 +28,15 @@ const Header: FC = () => {
       <NavLink to="sandwich">Sandwich</NavLink>
       <NavLink to="cat-card">Cat Card</NavLink>
       <NavLink to="flower-card">Flower Card</NavLink>
-      <span>Сейчас в магазине <span style={{ color: "blue", fontSize: "20px" , width: "bold"}}>{products.length}</span> товаров</span>
-    </div>
+      </div>
+      
+      <div className={styles.inform}>
+        <span>Сейчас в магазине <span style={{ color: "rgb(0, 255, 136)", fontSize: "20px" , width: "bold"}}>{products.length}</span> товаров</span>
+        <span>My favorites: <span style={{color: "rgb(0, 255, 136)", fontSize: "20px"}}> {favorites.length} </span> products</span>
+      </div>
+
+      </div>  
+    </>
   );
 };
 

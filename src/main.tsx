@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Suspense, lazy } from "react"
 import ReactDOM from "react-dom/client"
 import { Provider } from "react-redux"
 import { store } from "./app/store"
@@ -15,11 +15,14 @@ import CatCard from "./components/catCard/CatCard"
 
 import Parent from "./components/parent/Parent"
 import Error from "./components/error/Error"
-import ProductPage from "./features/products/productPage/ProductPage"
 import Product from "./features/products/product/Product"
 import UsersPage from "./features/users/userPage/UsersPage"
 import Shop from "./components/shop/Shop"
 import CityPage from "./components/cityPage/CityPage"
+import Loader from "./components/loader/Loader"
+
+// import ProductPage from "./features/products/productPage/ProductPage"
+const ProductPage = lazy(()=> import('./features/products/productPage/ProductPage'))
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
@@ -27,7 +30,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Shop/>} />
-          <Route path="products" element={<ProductPage />} />
+
+          <Route path="products" element={
+          <Suspense fallback={<Loader/>}>
+            <ProductPage />
+          </Suspense>
+          
+          } />
           
           <Route path="products/:id" element={<Product />} />
 

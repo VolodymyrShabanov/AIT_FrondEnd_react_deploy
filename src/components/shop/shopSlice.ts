@@ -8,13 +8,25 @@ import IShopState from "./types/ShopState";
 const initialState:IShopState = {
     products: [],
     isLoading: false,
-    error: null
+    error: null,
+    favorites: []
 }
 
 export const shopSlice = createSlice ( {
     name: "shop",
     initialState,
-    reducers: {},
+    reducers: {
+        toggleFavoritesShop: (state, action) => {
+            const id = action.payload
+            const index = state.favorites.indexOf(id)
+            if (index === -1) {
+              state.favorites.push(id)
+            } else {
+              state.favorites.splice(index, 1)
+            }
+          },
+
+    },
 
     extraReducers: (builder) => {
         builder 
@@ -32,3 +44,5 @@ export const shopSlice = createSlice ( {
         })
     }
 })
+
+export const { toggleFavoritesShop } = shopSlice.actions

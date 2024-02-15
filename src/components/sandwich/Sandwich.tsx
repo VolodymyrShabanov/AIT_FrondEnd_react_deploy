@@ -1,6 +1,7 @@
 import { FC, useState } from "react";
 
 import style from "./Sandwich.module.css";
+import { motion } from "framer-motion";
 
 
 
@@ -24,8 +25,17 @@ const Sandwich: FC = () => {
   }
 
 
+   const initialVariant ={
+    hidden:{opacity: 1, rotate: -30},
+    visible: {opacity: 1, rotate: 0, transition: {duration: 0.8}}
+    }
+
   return (
-    <div>
+    <motion.div
+    initial='hidden'
+    animate='visible'
+    variants={initialVariant}
+    >
       <h1>Sandwich</h1>
       <p>{sandwich}</p>
       {/* TODO - Universal button -> нужно детально разобрать!!!!! */}
@@ -40,7 +50,7 @@ const Sandwich: FC = () => {
       <button onClick={addSausage}>add sausage</button>
 
 
-    </div>
+    </motion.div>
   );
 };
 
