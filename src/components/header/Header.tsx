@@ -13,7 +13,7 @@ const Header: FC = () => {
   }, [])
   return (
     <div className={styles.navbar}>
-      <NavLink to="/AIT_FrondEnd_react_deploy">Home page</NavLink>
+      <NavLink to="/">Home page</NavLink>
 
       <NavLink to="products">Products</NavLink>
       

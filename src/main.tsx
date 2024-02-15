@@ -6,7 +6,7 @@ import App from "./App"
 import "./index.css"
 import Products from "./features/products/Products"
 import Memes from "./features/memes/Memes"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { HashRouter, Route, Routes } from "react-router-dom"
 import Layout from "./layout/Layout"
 import Sandwich from "./components/sandwich/Sandwich"
 
@@ -23,9 +23,9 @@ import CityPage from "./components/cityPage/CityPage"
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
-        <Route path="AIT_FrondEnd_react_deploy" element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           <Route index element={<Shop/>} />
           <Route path="products" element={<ProductPage />} />
           
@@ -45,7 +45,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Route path="*" element={<Error />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
 
     {/* <App /> */}
     {/* <Products/> */}
