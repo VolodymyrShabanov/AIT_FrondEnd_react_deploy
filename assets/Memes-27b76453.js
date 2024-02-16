@@ -1,0 +1,2 @@
+import{u as c,r as n,e as r,b as m,j as e}from"./index-a224874c.js";const o="_container_1i4dt_1",d="_image_1i4dt_27",t={container:o,image:d},p=()=>{const i=c();n.useEffect(()=>{i(r())},[]);const{memes:a}=m(s=>s.memes);return e.jsxs("div",{children:[e.jsx("h1",{children:"Memes"}),a.map(s=>e.jsxs("div",{className:t.container,children:[e.jsx("h4",{children:s.name}),e.jsx("div",{className:t.image,children:e.jsx("img",{src:s.url,width:s.width/3,height:s.height/3})})]},s.id))]})};export{p as default};
+//# sourceMappingURL=Memes-27b76453.js.map
